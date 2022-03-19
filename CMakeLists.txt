@@ -5,7 +5,7 @@ enable_language(CXX)
 add_compile_options(-Wall -Werror)
 
 set(SFML_DIR SFML/lib/cmake/SFML)
-set(APP_INCLUDES include)
+set(APP_SOURCES source)
 
 if(TIDY)
         set(CMAKE_CXX_CLANG_TIDY
@@ -28,7 +28,7 @@ if(FORMAT)
         message(STATUS "clang-format ON")
 endif()
 
-add_executable(game ${include})
+add_executable(game ${APP_SOURCES})
 
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED) #window system network audio REQUIRED)
 target_link_libraries(game sfml-graphics) #sfml-window sfml-system sfml-network sfml-audio)
