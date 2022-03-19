@@ -1,0 +1,23 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+
+AccessModifierOffset: 0
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: false
+AlignEscapedNewlines: Right
+AlignTrailingComments: true
+AllowAllConstructorInitializersOnNextLine: true
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+IndentWidth: 4
+
+UseTab: ForIndentation
+BreakBeforeBraces: Allman
+
+TabWidth: 4
+---
