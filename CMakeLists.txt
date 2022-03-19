@@ -28,7 +28,7 @@ if(FORMAT)
         message(STATUS "clang-format ON")
 endif()
 
-add_executable(game main.cpp)
+add_executable(game ${include})
 
 find_package(SFML 2.5 COMPONENTS graphics REQUIRED) #window system network audio REQUIRED)
 target_link_libraries(game sfml-graphics) #sfml-window sfml-system sfml-network sfml-audio)
