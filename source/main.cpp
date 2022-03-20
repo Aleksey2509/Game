@@ -1,22 +1,46 @@
 #include <SFML/Graphics.hpp>
+#include "../include/Platform.hpp"
+#include "../include/Visual.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::VideoMode def = sf::VideoMode::getDesktopMode();
+    const uint32_t HEIGHT = def.height;
+    const uint32_t WIDTH = def.width;
+    const uint8_t kDataNum = 10;
 
-    while (window.isOpen())
+    sf::RenderWindow window(def, "Bulletoid");
+
+    sf::Event event;
+
+    Platform platforms(kDataNum, WIDTH, HEIGHT);
+    Visual vis(WIDTH, HEIGHT, platforms);
+
+    vis.setPosition(0, 0);
+
+    while(window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        while(window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if(event.type == sf::Event::Closed)
+            {
                 window.close();
+            }
+            if(event.type == sf::Event::KeyPressed)
+            {
+                switch(event.key.code)
+                {
+                    case sf::Keyboard::Escape:
+                        window.close();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
-
-        window.clear();
-        window.draw(shape);
+        vis.render();
+        window.clear(BACKGROUND);
+        window.draw(vis);
         window.display();
     }
 
