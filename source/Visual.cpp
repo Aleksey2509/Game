@@ -1,8 +1,7 @@
 #include "../include/Visual.hpp"
 
-Visual::Visual(uint32_t max_width, uint32_t max_height, Platform& platforms): width_(max_width), 
-																			  height_(max_height),
-																			  platforms_(platforms)
+Visual::Visual(uint32_t max_width, uint32_t max_height, Platform& platforms)
+    : width_(max_width), height_(max_height), platforms_(platforms)
 {
 	rects_height_ = static_cast<float>(height_) / 100;
 	rects_width_ = static_cast<float>(width_) / 10;
@@ -18,7 +17,7 @@ void Visual::render()
 {
 	texture_.clear(BACKGROUND);
 	coords temp;
-	for(uint8_t i = 0, j = rects_.size(); i < j; i++)
+	for (uint8_t i = 0, j = rects_.size(); i < j; i++)
 	{
 		rects_[i].setSize(sf::Vector2f(rects_width_, rects_height_));
 		temp = platforms_.getblock(i);
@@ -26,5 +25,5 @@ void Visual::render()
 		rects_[i].setFillColor(colors_[i]);
 		texture_.draw(rects_[i]);
 	}
-	texture_.display();	
+	texture_.display();
 }

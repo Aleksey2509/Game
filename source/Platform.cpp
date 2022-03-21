@@ -1,8 +1,10 @@
 #include "../include/Platform.hpp"
-#include <random>
-#include <ctime>
 
-Platform::Platform(uint8_t amount, uint32_t max_width, uint32_t max_height) : amount_(amount)
+#include <ctime>
+#include <random>
+
+Platform::Platform(uint8_t amount, uint32_t max_width, uint32_t max_height)
+    : amount_(amount)
 {
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
@@ -12,7 +14,7 @@ Platform::Platform(uint8_t amount, uint32_t max_width, uint32_t max_height) : am
 	std::uniform_int_distribution<> distrib_w(1, max_width);
 
 	coords temp;
-	for(uint8_t i = 0; i < amount_; i++)
+	for (uint8_t i = 0; i < amount_; i++)
 	{
 		temp.first = distrib_w(gen);
 		temp.second = distrib_h(gen);
@@ -20,16 +22,13 @@ Platform::Platform(uint8_t amount, uint32_t max_width, uint32_t max_height) : am
 	}
 }
 
-uint8_t Platform::getamount()
-{
-	return amount_;
-}
+uint8_t Platform::getamount() { return amount_; }
 
 coords Platform::getblock(uint8_t pos)
 {
-	if(pos > amount_)
+	if (pos > amount_)
 	{
-		return coords (0, 0);
+		return coords(0, 0);
 	}
 	return blocks_[pos];
 }
