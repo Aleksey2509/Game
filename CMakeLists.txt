@@ -5,7 +5,7 @@ enable_language(CXX)
 add_compile_options(-Wall -Werror)
 
 set(SFML_DIR SFML/lib/cmake/SFML)
-set(APP_SOURCES source/main.cpp source/Platform.cpp source/Visual.cpp
+set(APP_SOURCES Game/main.cpp source/Platform.cpp source/Visual.cpp
         Engine/CheckKey.cpp Engine/Collision.cpp Engine/Timer.cpp)
 
 if(TIDY)
