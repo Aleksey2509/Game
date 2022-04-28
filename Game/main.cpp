@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
-#include "../include/Platform.hpp"
-#include "../include/Visual.hpp"
+#include "Platform.hpp"
+#include "Visual.hpp"
 
 int main()
 {
