@@ -2,7 +2,7 @@
 
 Collision::Collision(CollisionBox& body): body_(body) {}
 
-bool CheckCollision(CollisionBox& other, sf::Vector2f& result) const
+bool Collision::CheckCollision(Collision& other, sf::Vector2f& result) const
 {
 	const sf::Vector2f dif = other.body_.pos_ - body_.pos_;
 	sf::Vector2f absdif{dif};

@@ -1,12 +1,13 @@
 #ifndef ENGINE_COLLISION_HPP
 #define ENGINE_COLLISION_HPP
 
+#include "CollisionBox.hpp"
 struct Collision
 {
 public:
 	Collision(CollisionBox& body);
 
-	bool CheckCollision(CollisionBox& other, sf::Vector2f result) const;
+	bool CheckCollision(Collision& other, sf::Vector2f& result) const;
 	CollisionBox& body_;
 };
 

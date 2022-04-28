@@ -2,6 +2,7 @@
 #define ENGINE_TIMER_HPP
 
 #include <SFML/System/Clock.hpp>
+#include <functional>
 
 class Timer
 {

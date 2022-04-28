@@ -25,7 +25,7 @@ void CheckKey::Update()
 {
 	for(char i = 'A'; i <= 'Z'; i++)
 	{
-		keys_[i] = sf::Keyboard::isKeyPressed(sf::Keyboard::key(i - 'A'));
+		keys_[i] = sf::Keyboard::isKeyPressed((sf::Keyboard::Key)(i - 'A'));
 	}
 	buttons_['L'] = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	buttons_['R'] = sf::Mouse::isButtonPressed(sf::Mouse::Right);
