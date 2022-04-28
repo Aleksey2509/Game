@@ -8,6 +8,8 @@ class Platform : public sf::Sprite
 {
 public:
 	Platform(sf::Vector2f position, sf::Vector2f size);
+
+	const CollisionBox& getBox() const;
 private:
 	CollisionBox box_;
 };
