@@ -1,5 +1,5 @@
-#ifndef SFML_INCLUDE_PLATFORM_HPP
-#define SFML_INCLUDE_PLATFORM_HPP
+#ifndef GAME_PLATFORM_HPP
+#define GAME_PLATFORM_HPP
 
 #include <SFML/Graphics.hpp>
 #include <CollisionBox.hpp>
@@ -14,4 +14,4 @@ private:
 	CollisionBox box_;
 };
 
-#endif  // SFML_INCLUDE_PLATFORM_HPP
+#endif  // GAME_PLATFORM_HPP
