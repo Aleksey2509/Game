@@ -20,7 +20,7 @@ void InGame::Render(sf::RenderTarget& target)
 
 void InGame::InitAssets()
 {
-	textureManager_.Load("background", "../../../map.png");
+	textureManager_.Load("background", "../../../Images/map.png");
 }
 
 void InGame::InitPlatforms() {}

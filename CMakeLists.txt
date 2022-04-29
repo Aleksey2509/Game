@@ -6,7 +6,8 @@ add_compile_options(-Wall -Werror)
 
 set(SFML_DIR SFML/lib/cmake/SFML)
 set(APP_SOURCES Game/main.cpp Game/Game.cpp Game/Platform.cpp Game/AliveObjects/Entity.cpp
-        Engine/CheckKey.cpp Engine/Collision.cpp Engine/Timer.cpp)
+        Engine/CheckKey.cpp Engine/Collision.cpp Engine/Timer.cpp
+        Game/StateMachine/StateMachine.cpp Game/StateMachine/States/InGame.cpp)
 
 if(TIDY)
         set(CMAKE_CXX_CLANG_TIDY
