@@ -1,6 +1,9 @@
 #ifndef GAME_ALIVEOBJECTS_HPP
 #define GAME_ALIVEOBJECTS_HPP
 
+#include "../../Engine/CollisionBox.hpp"
+#include <SFML/Graphics.hpp>
+
 class Entity : public sf::Drawable
 {
 public:
@@ -13,13 +16,13 @@ private:
 	CollisionBox box_;
 
 	sf::Texture* texture_ = nullptr;
-	sf::Texture* drawable_ = nullptr;
+	sf::Drawable* drawable_ = nullptr;
 
 	float dt_;
 	float fixdt_;
 
 	virtual void draw(sf::RenderTarget& target) const;
-}
+};
 
 
 #endif //GAME_ALIVEOBJECTS_HPP

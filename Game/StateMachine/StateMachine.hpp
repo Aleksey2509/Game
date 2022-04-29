@@ -1,0 +1,51 @@
+#ifndef GAME_STATEMACHINE_STATEMACHINE_HPP
+#define GAME_STATEMACHINE_STATEMACHINE_HPP
+
+#include <stack>
+#include <SFML/Graphics.hpp>
+
+class State;
+
+class StateMachine
+{
+public:
+	StateMachine(sf::RenderWindow& window, float dt, float fixdt);
+	~StateMachine();
+
+	void PushState(State* state);
+
+	void FixedUpdate();
+	void Update();
+	void Render();
+
+	sf::RenderWindow& window_;
+	float dt_;
+	float fixdt_;
+private:
+
+	sf::Sprite sprite_;
+	sf::RenderTexture frame_;
+	std::stack<State*> states_;
+};
+
+class State
+{
+public:
+	State(StateMachine& machine);
+	virtual ~State();
+
+	virtual void FixedUpdate() = 0;
+	virtual void Update() = 0;
+	virtual void Render(sf::RenderTarget& target) = 0;
+
+	bool IsRunning() const;
+protected:
+	StateMachine& machine_;
+	sf::RenderWindow& window_;
+
+	float dt_;
+	float fixdt_;
+	bool isRun = true;
+};
+
+#endif //GAME_STATEMACHINE_STATEMACHINE_HPP

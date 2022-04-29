@@ -1,8 +1,8 @@
 #include "Entity.hpp"
 
-Entity::Entity(float dt, float fixdt) : dt_(dt), fixdt(fixdt_) {}
+Entity::Entity(float dt, float fixdt) : dt_(dt), fixdt_(fixdt) {}
 
 void Entity::draw(sf::RenderTarget& target) const
 {
-	target.draw(*i_drawable);
+	target.draw(*drawable_);
 }
