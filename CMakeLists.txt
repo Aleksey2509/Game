@@ -5,15 +5,32 @@ enable_language(CXX)
 add_compile_options(-Wall -Werror)
 
 set(SFML_DIR SFML/lib/cmake/SFML)
-set(APP_SOURCES Game/main.cpp Game/Game.cpp Game/Platform.cpp #Game/AliveObjects/Entity.cpp
-        Engine/CheckKey.cpp Engine/CollisionBox.cpp Engine/Timer.cpp
-        Game/StateMachine/StateMachine.cpp Game/StateMachine/States/InGame.cpp)
+
+add_executable(${PROJECT_NAME} main.cpp)
+find_package(SFML 2.5 COMPONENTS graphics REQUIRED window system network audio REQUIRED)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system sfml-network sfml-audio)
+
+file(GLOB_RECURSE ENGINE_SOURCES Engine/*.[ch]pp)
+set(ENGINE_SOURCES ${ENGINE_SOURCES})
+
+add_library(Engine STATIC ${ENGINE_SOURCES})
+target_link_libraries(Engine sfml-graphics sfml-window sfml-system sfml-network sfml-audio)
+target_include_directories(Engine PUBLIC Engine/)
+
+file(GLOB_RECURSE GAME_SOURCES Game/*.[ch]pp)
+set(GAME_SOURCES ${GAME_SOURCES})
+
+add_library(Game STATIC ${GAME_SOURCES})
+target_link_libraries(Game Engine)
+target_include_directories(Game PUBLIC Game/)
+
+target_link_libraries(${PROJECT_NAME} Game Engine)
 
 if(TIDY)
         set(CMAKE_CXX_CLANG_TIDY
-                clang-tidy;
-                --format-style=file;
-                --header-filter=.*;
+        clang-tidy;
+        --format-style=file;
+        --header-filter=*.hpp;
 			)
         message(STATUS "clang-tidy ON")
 endif()
@@ -30,10 +47,5 @@ if(FORMAT)
         message(STATUS "clang-format ON")
 endif()
 
-add_executable(game ${APP_SOURCES})
-
-find_package(SFML 2.5 COMPONENTS graphics REQUIRED window system network audio REQUIRED)
-target_link_libraries(game sfml-graphics sfml-window sfml-system sfml-network sfml-audio)
-
-add_custom_target(run COMMENT "Running the game" COMMAND ./game)
-add_dependencies(run game)
+add_custom_target(run COMMENT "Running the game" COMMAND ./${PROJECT_NAME})
+add_dependencies(run ${PROJECT_NAME})

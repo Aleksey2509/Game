@@ -2,7 +2,7 @@
 #define GAME_PLATFORM_HPP
 
 #include <SFML/Graphics.hpp>
-#include "../Engine/CollisionBox.hpp"
+#include "CollisionBox.hpp"
 
 class Platform : public sf::Sprite
 {

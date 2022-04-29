@@ -1,7 +1,7 @@
 #ifndef GAME_GAME_HPP
 #define GAME_GAME_HPP
 
-#include "../Engine/CheckKey.hpp"
+#include "CheckKey.hpp"
 #include "StateMachine/StateMachine.hpp"
 #include "StateMachine/States/InGame.hpp"
 #include <SFML/Graphics.hpp>
