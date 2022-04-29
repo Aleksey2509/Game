@@ -2,9 +2,9 @@
 #define GAME_STATEMACHINE_STATES_INGAME_HPP
 
 //#include "../../AliveObjects/Entity.hpp"
-#include "../../../Engine/AssetsManager.hpp"
-#include "../../Platform.hpp"
-#include "../StateMachine.hpp"
+#include "AssetsManager.hpp"
+#include "Platform.hpp"
+#include "StateMachine/StateMachine.hpp"
 
 class InGame : public State
 {

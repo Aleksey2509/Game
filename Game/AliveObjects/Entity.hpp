@@ -1,7 +1,7 @@
 #ifndef GAME_ALIVEOBJECTS_HPP
 #define GAME_ALIVEOBJECTS_HPP
 
-#include "../../Engine/CollisionBox.hpp"
+#include "CollisionBox.hpp"
 #include <SFML/Graphics.hpp>
 
 class Entity : public sf::Drawable

@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "Game.hpp"
+#include "Game/Game.hpp"
 
 static const float kStepT = 0.01f;
 static const unsigned int kWidth = 1000;
