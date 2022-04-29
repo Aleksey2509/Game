@@ -1,48 +1,38 @@
 #include <SFML/Graphics.hpp>
+#include "Game.hpp"
 
-#include "Platform.hpp"
-#include "Visual.hpp"
+static const float kStepT = 0.01f;
 
 int main()
 {
-	sf::VideoMode def = sf::VideoMode::getDesktopMode();
-	const uint32_t HEIGHT = def.height;
-	const uint32_t WIDTH = def.width;
-	const uint8_t kDataNum = 10;
+	sf::Clock dClock;
+	sf::Clock fixdClock;
 
-	sf::RenderWindow window(def, "Bulletoid");
+	float dt = 0f;
+	float fixdt = 0f;
+	float gonet = 0f;
 
-	sf::Event event;
+	Game game(dt, fixdt);
 
-	Platform platforms(kDataNum, WIDTH, HEIGHT);
-	Visual vis(WIDTH, HEIGHT, platforms);
+	dClock.restart();
+	fixdClock.restart();
 
-	vis.setPosition(0, 0);
-
-	while (window.isOpen())
+	while(game.isRunning())
 	{
-		while (window.pollEvent(event))
+		gonet += dt;
+		while(gonet > kStepT)
 		{
-			if (event.type == sf::Event::Closed)
+			fixdt = fixdClock.restart().asSeconds();
+			if(fixdt > kStepT*5f)
 			{
-				window.close();
+				fixdt = kStepT;
 			}
-			if (event.type == sf::Event::KeyPressed)
-			{
-				switch (event.key.code)
-				{
-					case sf::Keyboard::Escape:
-						window.close();
-						break;
-					default:
-						break;
-				}
-			}
+			game.FixedUpdate();
+			gonet -= kStepT;
 		}
-		vis.render();
-		window.clear(BACKGROUND);
-		window.draw(vis);
-		window.display();
+		game.Update();
+		game.Render();
+		dt = dClock.restart().asSeconds();
 	}
 
 	return 0;
