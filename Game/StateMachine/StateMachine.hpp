@@ -2,15 +2,17 @@
 #define GAME_STATEMACHINE_STATEMACHINE_HPP
 
 #include <stack>
+#include <SFML/Graphics.hpp>
 
 class State;
+
 class StateMachine
 {
 public:
 	StateMachine(sf::RenderWindow& window, float dt, float fixdt);
 	~StateMachine();
 
-	void PushStat(State* state);
+	void PushState(State* state);
 
 	void FixedUpdate();
 	void Update();

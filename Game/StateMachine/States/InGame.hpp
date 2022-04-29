@@ -1,8 +1,10 @@
 #ifndef GAME_STATEMACHINE_STATES_INGAME_HPP
 #define GAME_STATEMACHINE_STATES_INGAME_HPP
 
-#include "../../AliveObjects/Entity.hpp"
+//#include "../../AliveObjects/Entity.hpp"
 #include "../../../Engine/AssetsManager.hpp"
+#include "../../Platform.hpp"
+#include "../StateMachine.hpp"
 
 class InGame : public State
 {
@@ -27,6 +29,6 @@ private:
 	void InitAssets();
 	void InitSprites();
 	void InitPlatforms();
-}
+};
 
 #endif //GAME_STATEMACHINE_STATES_INGAME_HPP

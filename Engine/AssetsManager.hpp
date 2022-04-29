@@ -7,6 +7,7 @@
 template <class T>
 class AssetsManager
 {
+public:
 	void Load(const std::string& name, const std::string& path)
 	{
 		assets_[name].loadFromFile(path);

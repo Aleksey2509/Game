@@ -9,14 +9,14 @@ StateMachine::StateMachine(sf::RenderWindow& window, float dt, float fixdt) :
 
 StateMachine::~StateMachine()
 {
-	while(~states_.empty())
+	while(!states_.empty())
 	{
 		delete states_.top();
 		states_.pop();
 	}
 }
 
-void StateMachine::PushStat(State* state)
+void StateMachine::PushState(State* state)
 {
 	states_.push(state);
 }
@@ -36,7 +36,7 @@ void StateMachine::Update()
 		states_.top()->Update();
 		if(!states_.top()->IsRunning())
 		{
-			deleete states_.top();
+			delete states_.top();
 			states_.pop();
 		}
 	}
@@ -55,7 +55,7 @@ void StateMachine::Render()
 		states_.top()->Render(frame_);
 	}
 	frame_.display();
-	sprite_.setTexture(frame.getTexture());
+	sprite_.setTexture(frame_.getTexture());
 	window_.draw(sprite_);
 }
 
@@ -64,7 +64,7 @@ machine_(machine), window_(machine.window_), dt_(machine.dt_), fixdt_(machine.fi
 
 State::~State() {}
 
-bool IsRunning() const
+bool State::IsRunning() const
 {
 	return isRun;
 }

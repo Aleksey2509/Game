@@ -20,9 +20,15 @@ void InGame::Render(sf::RenderTarget& target)
 
 void InGame::InitAssets()
 {
-	textureManager_.Load("background", "../../../Images/map.png");
+	textureManager_.Load("background", "../Images/map.png");
 }
 
 void InGame::InitPlatforms() {}
 
-void InGame::InitSprites() {}
+void InGame::InitSprites()
+{
+	auto& sprite = sprites_["background"];
+	sprite.setTexture(textureManager_.Get("background"));
+	sprite.setScale(sf::Vector2f(1.f, 1.f));
+	sprite.setPosition(sf::Vector2f(0.f, 0.f));
+}
