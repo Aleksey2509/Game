@@ -12,16 +12,19 @@ public:
 
 	virtual void FixedUpdate() = 0;
 	virtual void Update() = 0;
-private:
+
+	const CollisionBox& GetBox() const;
+protected:
 	CollisionBox box_;
 
+private:
 	sf::Texture* texture_ = nullptr;
 	sf::Drawable* drawable_ = nullptr;
 
 	float dt_;
 	float fixdt_;
 
-	virtual void draw(sf::RenderTarget& target) const;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 
