@@ -16,8 +16,6 @@ public:
 	const CollisionBox& GetBox() const;
 protected:
 	CollisionBox box_;
-
-private:
 	sf::Texture* texture_ = nullptr;
 	sf::Drawable* drawable_ = nullptr;
 
