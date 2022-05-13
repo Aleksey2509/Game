@@ -1,6 +1,6 @@
 #include "Animation.hpp"
 
-void Animation::Animation(unsigned int framesX, unsigned int framesY, float time, sf::Vector2i frameSize, sf::Sprite& sprite, unsigned int startY)
+Animation::Animation(unsigned int framesX, unsigned int framesY, float time, sf::Vector2i frameSize, sf::Sprite& sprite, unsigned int startY)
 {
 	unsigned int fCount = framesX * (framesY > 0 ? framesY : 1);
 	updateTime_ = time;

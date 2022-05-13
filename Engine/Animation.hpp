@@ -21,7 +21,7 @@ private:
 	unsigned int currentFrame_ = 0;
 	unsigned int frameCount_ = 0;
 	sf::IntRect* frames_ = nullptr;
-	sf::Sprite* srite_ = nullptr;
+	sf::Sprite* sprite_ = nullptr;
 
 	float goneTime_ = 0.f;
 	float updateTime_ = 0.f;

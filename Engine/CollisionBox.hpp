@@ -10,7 +10,6 @@ public:
 	CollisionBox(const sf::Vector2f& sz, const sf::Vector2f& pos);
 
 	bool CheckCollision(CollisionBox& other, sf::Vector2f& result) const;
-private:
 	sf::Vector2f sz_;
 	sf::Vector2f pos_;
 };
