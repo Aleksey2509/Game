@@ -1,4 +1,5 @@
 #include "CollisionBox.hpp"
+#include <iostream>
 
 CollisionBox::CollisionBox()
 {
@@ -8,7 +9,7 @@ CollisionBox::CollisionBox()
 
 CollisionBox::CollisionBox(const sf::Vector2f& sz, const sf::Vector2f& pos): sz_(sz), pos_(pos) {}
 
-bool CollisionBox::CheckCollision(CollisionBox& other, sf::Vector2f& result) const
+bool CollisionBox::CheckCollision(const CollisionBox& other, sf::Vector2f& result) const
 {
 	const sf::Vector2f dif = other.pos_ - pos_;
 	sf::Vector2f absdif{dif};
