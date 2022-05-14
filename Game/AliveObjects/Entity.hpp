@@ -7,8 +7,8 @@
 class Entity : public sf::Drawable
 {
 public:
-	Entity(float dt, float fixdt);
-	virtual ~Entity();
+	Entity(const float& dt, const float& fixdt);
+	virtual ~Entity() {}
 
 	virtual void FixedUpdate() = 0;
 	virtual void Update() = 0;
@@ -19,8 +19,8 @@ protected:
 	sf::Texture* texture_ = nullptr;
 	sf::Drawable* drawable_ = nullptr;
 
-	float dt_;
-	float fixdt_;
+	const float& dt_;
+	const float& fixdt_;
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
