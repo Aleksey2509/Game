@@ -1,8 +1,8 @@
 #include "Platform.hpp"
 
-Platform::Platform(sf::Vector2f sz, sf::Vector2f pos): box_(sz, pos) {}
+Platform::Platform(sf::Vector2f pos, sf::Vector2f sz): box_(sz, pos) {}
 
-const CollisionBox& Platform::getBox() const
+const CollisionBox& Platform::GetBox() const
 {
 	return box_;
 }
