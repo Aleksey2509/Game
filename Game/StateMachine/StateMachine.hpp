@@ -9,7 +9,7 @@ class State;
 class StateMachine
 {
 public:
-	StateMachine(sf::RenderWindow& window, float dt, float fixdt);
+	StateMachine(sf::RenderWindow& window, const float& dt, const float& fixdt);
 	~StateMachine();
 
 	void PushState(State* state);
@@ -19,8 +19,8 @@ public:
 	void Render();
 
 	sf::RenderWindow& window_;
-	float dt_;
-	float fixdt_;
+	const float& dt_;
+	const float& fixdt_;
 private:
 
 	sf::Sprite sprite_;
@@ -43,8 +43,8 @@ protected:
 	StateMachine& machine_;
 	sf::RenderWindow& window_;
 
-	float dt_;
-	float fixdt_;
+	const float& dt_;
+	const float& fixdt_;
 	bool isRun = true;
 };
 
