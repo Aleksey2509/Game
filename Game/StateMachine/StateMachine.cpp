@@ -1,6 +1,6 @@
 #include "StateMachine.hpp"
 
-StateMachine::StateMachine(sf::RenderWindow& window, float dt, float fixdt) :
+StateMachine::StateMachine(sf::RenderWindow& window, const float& dt, const float& fixdt) :
 	window_(window), dt_(dt), fixdt_(fixdt)
 {
 	auto params = window_.getSize();
