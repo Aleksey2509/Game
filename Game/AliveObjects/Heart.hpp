@@ -19,9 +19,9 @@ public:
 
 	void ResolveCollision(std::vector<Platform>& platforms);
 	bool IsExist() const;
+	bool exist_ = true;
 private:
 	bool grounded_ = false;
-	bool exist_ = true;
 	Animation animations_;
 
 	FixedClock deSpawnClock_;

@@ -1,9 +1,9 @@
 #include "HealthBar.hpp"
 
-HealthBar::HealthBar()
+HealthBar::HealthBar(sf::Texture* texture)
 {
-	texture_.loadFromFile("../../Images/healthbar.png");
-	sprite_.setTexture(texture_);
+	texture_ = texture;
+	sprite_.setTexture(*texture_);
 	sprite_.setTextureRect(sf::IntRect(0, coords_[curpos_], 96, 32));
 	sprite_.setScale(sf::Vector2f(2.f, 2.f));
 	sprite_.setPosition(sf::Vector2f(65.f, 35.f));
