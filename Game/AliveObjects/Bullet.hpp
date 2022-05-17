@@ -6,8 +6,6 @@
 static constexpr float kBulletSpeed = 5.f;
 static constexpr float kBulletHeight = 10.f;
 static constexpr float kBulletWidth = 20.f;
-static const int kWidth = 1000;
-static const int kHeight = 1000;
 
 enum Direction
 {

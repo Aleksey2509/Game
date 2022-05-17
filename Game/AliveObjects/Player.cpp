@@ -14,6 +14,11 @@ Player::Player(const float& dt, const float& fixdt, sf::Texture* texture) : Enti
 	InitAnimations();
 }
 
+Player::~Player()
+{
+	delete healthbar_;
+}
+
 void Player::FixedUpdate()
 {
 	Move();
@@ -24,6 +29,11 @@ void Player::Update()
 	Animate();
 	UpdateVelocity();
 	KeepInBorders();
+	UpdateTimer();
+	if(healthbar_->GetHealthState() <= 0)
+	{
+		alive_ = false;
+	}
 }
 
 void Player::ResolveCollision(std::vector<Platform>& platforms)
@@ -76,6 +86,16 @@ void Player::ResolveCollision(std::vector<Platform>& platforms)
 	if(velocity_.y > 0.f)
 	{
 		wasGrounded_ = false;
+	}
+}
+
+void Player::ResolveCollision(Heart* heart)
+{
+	sf::Vector2f pos;
+	if(GetBox().CheckCollision(heart->GetBox(), pos) && healthbar_->GetHealthState() != 3)
+	{
+		healthbar_->Change(false);
+		heart->exist_ = false;
 	}
 }
 
@@ -141,6 +161,24 @@ void Player::Move()
 	body->setPosition(box_.pos_);
 }
 
+void Player::UpdateTimer()
+{
+	if(hit_)
+	{
+		unsigned int blink[2] = {60, 255};
+
+		auto body = reinterpret_cast<sf::Sprite*>(drawable_);
+
+		sf::Color clr = body->getColor();
+		body->setColor(sf::Color(clr.r, clr.g, clr.b, blink[(!(currhit_%2) ? 0 : 1)]));
+		if(hitTimer_.getElapsedTime().asSeconds() > 0.175f)
+		{
+			currhit_++;
+			hitTimer_.restart();
+		}
+	}
+}
+
 void Player::UpdateVelocity()
 {
 	if(!moveable_)
@@ -195,4 +233,5 @@ void Player::InitBox()
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*drawable_);
+	target.draw(*healthbar_);
 }

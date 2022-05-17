@@ -12,7 +12,6 @@
 #include "StateMachine/StateMachine.hpp"
 #include "AliveObjects/Player.hpp"
 
-
 class InGame : public State
 {
 public:
@@ -24,14 +23,18 @@ public:
 	virtual void Render(sf::RenderTarget& target);
 private:
 	Player* player_;
+	Heart* heart_ = nullptr;
 
 	sf::Clock clock_;
 	sf::Clock timeClock_;
+	sf::Clock heartSpawnClock_;
+
 	std::unordered_map<std::string, sf::Sprite> sprites_;
 	std::vector<Platform> platforms_;
     std::list<Bullet> bullets_;
 	AssetsManager<sf::Texture> textureManager_;
 
+	void SpawnHeart();
 	void InitEntities();
 	void UpdateEntities();
 	void FixedUpdateEntities();

@@ -22,7 +22,7 @@ private:
 	sf::RenderWindow window_;
 	sf::Event event_;
 
-    const float& dt_;
+	const float& dt_;
 	const float& fixdt_;
 
 	void HandleEvents();

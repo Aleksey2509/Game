@@ -2,6 +2,9 @@
 #include <iostream>
 #include <fstream>
 
+static const unsigned kWidth = 1000;
+static const unsigned kHeight = 1000;
+
 Bullet::Bullet(const float& dt, const float& fixdt, sf::Texture* texture, const float startY, Direction dir) :
     Entity::Entity(dt, fixdt)
 {
@@ -109,8 +112,6 @@ void Bullet::FixedUpdate()
         box_.pos_.x -= speed_;
         sprite_.move(speed_ * (-1), 0.f);
     }
-
-    #endif
 
     return;
 }
