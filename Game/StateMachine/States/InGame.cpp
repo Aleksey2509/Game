@@ -146,14 +146,6 @@ void InGame::resolveBulletCollisions()
             }
         }
 
-        if (!bulletIt.ifAlive())
-            continue;
-
-        for (auto platform : platforms_)
-        {
-            if (bulletBox.CheckCollision(platform.GetBox(), intersect))
-                bulletIt.kill();
-        }
     }
 
     removeDeadBullets();

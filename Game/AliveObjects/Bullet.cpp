@@ -18,7 +18,7 @@ void Bullet::InitCollisionBox(float startY)
     if (dir_ == Direction::RIGHT)
         box_.pos_.x = 0;
     else
-        box_.pos_.x = 1000;
+        box_.pos_.x = kHeight;
 
     box_.pos_.y = startY;
     box_.sz_.x = speed_;
@@ -42,7 +42,7 @@ void Bullet::InitSprite()
     {
         toDraw_.left = 0;
         toDraw_.width = speed_ * textureSize_.x / kBulletWidth;
-        sprite_.setPosition(sf::Vector2f(1000.f, box_.pos_.y));
+        sprite_.setPosition(sf::Vector2f(kHeight, box_.pos_.y));
     }
 
     sprite_.setTextureRect(toDraw_);
@@ -52,15 +52,6 @@ void Bullet::InitSprite()
 
 void Bullet::FixedUpdate()
 {
-    #if 0
-    std::ofstream log;
-    log.open("log", std::ios_base::app);
-    log << "\n\nUpdating bullet\n";
-    log << "Previous box_sz_x - " << box_.sz_.x << " previous box_sz_y - " << box_.sz_.y << " previous box_pos_x - " << box_.pos_.x
-    << " previous box_pos_y - " << box_.pos_.y << "\n";
-    log << "Old toDraw_.left - " << toDraw_.left << " Old toDraw_.top - " << toDraw_.top << " Old toDraw_.width - " << toDraw_.width
-    << " Old toDraw_.height - " << toDraw_.height << "\n";
-    #endif
 
     if (dir_ == Direction::RIGHT)
     {
@@ -74,11 +65,11 @@ void Bullet::FixedUpdate()
             return;
         }
 
-        if (box_.pos_.x >= (1000 - kBulletWidth))
+        if (box_.pos_.x >= (kWidth - kBulletWidth))
         {
             if (box_.sz_.x != 0)
                 box_.sz_.x -= speed_;
-            if (box_.pos_.x != 1000)
+            if (box_.pos_.x != kWidth)
                 box_.pos_.x += speed_;
             toDraw_.width = textureSize_.x * box_.sz_.x / kBulletWidth;
 
@@ -92,7 +83,7 @@ void Bullet::FixedUpdate()
 
     else
     {
-        if ((box_.sz_.x < kBulletWidth) && (box_.pos_.x == 1000))
+        if ((box_.sz_.x < kBulletWidth) && (box_.pos_.x == kWidth))
         {
             box_.sz_.x += speed_;
             toDraw_.width = textureSize_.x * box_.sz_.x / kBulletWidth;
@@ -119,17 +110,6 @@ void Bullet::FixedUpdate()
         sprite_.move(speed_ * (-1), 0.f);
     }
 
-
-
-    #if 0
-debugPrint:
-    log << "Now: \n";
-    log << "box_sz_x - " << box_.sz_.x << " box_sz_y - " << box_.sz_.y << " box_pos_x - " << box_.pos_.x
-    <<  "box_pos_y - " << box_.pos_.y << "\n";
-    log << "toDraw_.left - " << toDraw_.left << " toDraw_.top - " << toDraw_.top << " toDraw_.width - " << toDraw_.width
-    << " toDraw_.height - " << toDraw_.height << "\n";
-
-    log.close();
     #endif
 
     return;
