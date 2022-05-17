@@ -6,20 +6,23 @@
 #include "Platform.hpp"
 #include "Heart.hpp"
 #include "UI/HealthBar.hpp"
+#include "Bullet.hpp"
 #include <unordered_map>
 #include <string>
+#include <list>
 
 class Player final : public Entity
 {
 public:
 	Player(const float& dt, const float& fixdt, sf::Texture* texture);
-	~Player();
+	virtual ~Player();
 
 	virtual void FixedUpdate();
 	virtual void Update();
 
 	void ResolveCollision(std::vector<Platform>& platforms);
 	void ResolveCollision(Heart* heart);
+	void ResolveCollision(std::list<Bullet>& bullets);
 
 	bool IsAlive() const;
 	HealthBar* healthbar_;
@@ -38,7 +41,7 @@ private:
 	bool moveable_ = true;
 
 	bool hit_ = false;
-	int currhit_ = 10;
+	int currhit_ = 0;
 	sf::Clock hitTimer_;
 
 	const sf::Vector2i playerSize_ = sf::Vector2i(96, 84);
