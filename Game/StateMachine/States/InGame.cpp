@@ -7,7 +7,7 @@ static std::mt19937 gen(rd());
 static int maxBullets = 5;
 
 static const int kWidth = 1000;
-// static const int kHeight = 1000;
+static const int kHeight = 1000;
 
 InGame::InGame(StateMachine& machine) : State(machine)
 {
@@ -19,35 +19,35 @@ InGame::InGame(StateMachine& machine) : State(machine)
 
 InGame::~InGame()
 {
-	// delete player_;
+	delete player_;
 }
 
 void InGame::FixedUpdate()
 {
-	// if(player_->IsAlive())
-	// {
-	// }
-    resolveBulletCollisions();
-    FixedUpdateEntities();
+	if(player_->IsAlive())
+	{
+        FixedUpdateEntities();
+        resolveBulletCollisions();
+	}
 }
 
 void InGame::Update()
 {
-    // if(player_->IsAlive())
-	// {
-    //	}
-	UpdateEntities();
-    static int ticks = 1;
-    if (bullets_.size() < maxBullets)
-        InitBullet();
+    if(player_->IsAlive())
+	{
+        UpdateEntities();
+        static int ticks = 1;
+        if (bullets_.size() < maxBullets)
+            InitBullet();
 
-    ticks = (ticks + 1) % 200;
+        ticks = (ticks + 1) % 200;
+    }
 }
 
 void InGame::Render(sf::RenderTarget& target)
 {
 	target.draw(sprites_["background"]);
-	// target.draw(*player_);
+	target.draw(*player_);
     for (auto bulletIt = bullets_.begin(); bulletIt != bullets_.end(); ++bulletIt)
     {
         target.draw(bulletIt->GetSprite());
@@ -56,7 +56,7 @@ void InGame::Render(sf::RenderTarget& target)
 
 void InGame::InitAssets()
 {
-	// textureManager_.Load("player", "../Images/player.png");
+	textureManager_.Load("player", "../Images/player.png");
 	textureManager_.Load("background", "../Images/map.png");
     textureManager_.Load("rightBullet", "../Images/rightBullet.png");
     textureManager_.Load("leftBullet", "../Images/leftBullet.png");
@@ -87,12 +87,12 @@ void InGame::InitSprites()
 
 void InGame::InitEntities()
 {
-	// player_ = new Player(dt_, fixdt_, &textureManager_.Get("player"));
+	player_ = new Player(dt_, fixdt_, &textureManager_.Get("player"));
 }
 
 void InGame::FixedUpdateEntities()
 {
-	// player_->FixedUpdate();
+	player_->FixedUpdate();
     for (auto bulletIt = bullets_.begin(); bulletIt != bullets_.end(); ++bulletIt)
     {
         bulletIt->FixedUpdate();
@@ -107,8 +107,8 @@ void InGame::FixedUpdateEntities()
 
 void InGame::UpdateEntities()
 {
-	// player_->ResolveCollision(platforms_);
-	// player_->Update();
+	player_->ResolveCollision(platforms_);
+	player_->Update();
 }
 
 void InGame::InitBullet()

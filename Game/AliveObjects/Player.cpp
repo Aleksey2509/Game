@@ -3,7 +3,7 @@
 #include "CheckKey.hpp"
 
 static const int kWidth = 1000;
-// static const int kHeight = 1000;
+static const int kHeight = 1000;
 
 Player::Player(const float& dt, const float& fixdt, sf::Texture* texture) : Entity(dt, fixdt)
 {
