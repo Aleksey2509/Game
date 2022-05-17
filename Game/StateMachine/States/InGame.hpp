@@ -33,6 +33,8 @@ private:
     std::list<Bullet> bullets_;
 	AssetsManager<sf::Texture> textureManager_;
 
+	const size_t maxBullets = 5;
+
 	void SpawnHeart();
 	void InitEntities();
 	void UpdateEntities();

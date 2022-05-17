@@ -12,7 +12,7 @@ class Heart : public Entity
 {
 public:
 	Heart(const float& dt, const float& fixdt, sf::Texture* texture);
-	~Heart();
+	virtual ~Heart();
 
 	virtual void FixedUpdate();
 	virtual void Update();

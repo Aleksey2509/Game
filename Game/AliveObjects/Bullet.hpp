@@ -24,22 +24,20 @@ public:
     virtual const sf::Sprite& GetSprite() const;
     void kill();
     bool ifAlive();
+    bool alive_ = true;
+    Direction dir_ = Direction::RIGHT;
 
 private:
 
-    Direction dir_ = Direction::RIGHT;
     float speed_ = kBulletSpeed;
 
     sf::Vector2u textureSize_{650, 415}; // hardcode, bad
     void InitCollisionBox(float startY);
 
-    bool alive_ = true;
-
     sf::IntRect toDraw_;
     sf::Sprite sprite_;
     void InitSprite();
     const sf::Vector2i bulletSize = sf::Vector2i(20, 10);
-
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
