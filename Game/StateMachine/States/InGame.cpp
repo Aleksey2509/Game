@@ -1,8 +1,6 @@
 #include <iostream>
 #include "InGame.hpp"
 
-static int maxBullets = 5;
-
 static const int kWidth = 1000;
 static const int kHeight = 1000;
 
@@ -129,6 +127,7 @@ void InGame::UpdateEntities()
 	{
 		player_->ResolveCollision(heart_);
 	}
+	player_->ResolveCollision(bullets_);
 	player_->Update();
 	if(!heart_)
 	{

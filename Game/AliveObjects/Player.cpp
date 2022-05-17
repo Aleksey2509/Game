@@ -106,6 +106,17 @@ bool Player::IsAlive() const
 
 void Player::Animate()
 {
+	if(!moveable_)
+	{
+		animations_["takedamage"].Update(dt_);
+		if(animations_["takedamage"].GetCurrentFrame() == animations_["takedamage"].GetFrameCount() - 1)
+		{
+			animations_["takedamage"].SetFrame(0);
+			moveable_ = true;
+			accel_ = 0.85f;
+		}
+		return;
+	}
 	if(velocity_.y == 0.f)
 	{
 		if(velocity_.x < 0.f || velocity_.x > 0.f)
@@ -165,6 +176,12 @@ void Player::UpdateTimer()
 {
 	if(hit_)
 	{
+		if(currhit_ > 9)
+		{
+			currhit_ = 0;
+			hit_ = false;
+			return;
+		}
 		unsigned int blink[2] = {60, 255};
 
 		auto body = reinterpret_cast<sf::Sprite*>(drawable_);
@@ -234,4 +251,34 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*drawable_);
 	target.draw(*healthbar_);
+}
+
+void Player::ResolveCollision(std::list<Bullet>& bullets)
+{
+	for(auto& bullet : bullets)
+	{
+		sf::Vector2f pos;
+		if(!GetBox().CheckCollision(bullet.GetBox(), pos) || hit_)
+		{
+			continue;
+		}
+		healthbar_->Change(true);
+		hit_ = true;
+		grabbing_ = false;
+		moveable_ = false;
+		accel_ = 0.925f;
+
+		velocity_.y = -950.f;
+		int mulit = 1;
+		switch(bullet.dir_)
+		{
+			default:
+			case RIGHT: mulit = 1;
+						break;
+			case LEFT: mulit = -1;
+						break;
+		}
+		velocity_.x = mulit * 1200.f;
+		reinterpret_cast<sf::Sprite*>(drawable_)->setScale(sf::Vector2f(2.f * -mulit, 2.f));
+	}
 }
