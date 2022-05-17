@@ -14,6 +14,11 @@ Player::Player(const float& dt, const float& fixdt, sf::Texture* texture) : Enti
 	InitAnimations();
 }
 
+Player::~Player()
+{
+	delete healthbar_;
+}
+
 void Player::FixedUpdate()
 {
 	Move();
@@ -76,6 +81,16 @@ void Player::ResolveCollision(std::vector<Platform>& platforms)
 	if(velocity_.y > 0.f)
 	{
 		wasGrounded_ = false;
+	}
+}
+
+void Player::ResolveCollision(Heart* heart)
+{
+	sf::Vector2f pos;
+	if(GetBox().CheckCollision(heart->GetBox(), pos) && healthbar_->GetHealthState() != 3)
+	{
+		healthbar_->Change(false);
+		heart->exist_ = false;
 	}
 }
 
@@ -195,4 +210,5 @@ void Player::InitBox()
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*drawable_);
+	target.draw(*healthbar_);
 }

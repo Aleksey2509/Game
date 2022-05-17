@@ -4,6 +4,8 @@
 #include "Animation.hpp"
 #include "AliveObjects/Entity.hpp"
 #include "Platform.hpp"
+#include "Heart.hpp"
+#include "UI/HealthBar.hpp"
 #include <unordered_map>
 #include <string>
 
@@ -11,14 +13,16 @@ class Player final : public Entity
 {
 public:
 	Player(const float& dt, const float& fixdt, sf::Texture* texture);
-	~Player() {}
+	~Player();
 
 	virtual void FixedUpdate();
 	virtual void Update();
 
 	void ResolveCollision(std::vector<Platform>& platforms);
+	void ResolveCollision(Heart* heart);
 
 	bool IsAlive() const;
+	HealthBar* healthbar_;
 private:
 	sf::Vector2f velocity_;
 	bool alive_ = true;
@@ -32,6 +36,7 @@ private:
 	bool wasGrounded_ = false;
 
 	bool moveable_ = true;
+
 
 	const sf::Vector2i playerSize_ = sf::Vector2i(96, 84);
 	std::unordered_map<std::string, Animation> animations_;
