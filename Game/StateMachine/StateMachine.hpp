@@ -1,7 +1,7 @@
 #ifndef GAME_STATEMACHINE_STATEMACHINE_HPP
 #define GAME_STATEMACHINE_STATEMACHINE_HPP
 
-#include <stack>
+#include <queue>
 #include <SFML/Graphics.hpp>
 
 class State;
@@ -25,7 +25,7 @@ private:
 
 	sf::Sprite sprite_;
 	sf::RenderTexture frame_;
-	std::stack<State*> states_;
+	std::queue<State*> states_;
 };
 
 class State
