@@ -8,10 +8,12 @@ class Timer
 {
 public:
 	void Update(float dt);
-	Timer(float time, std::function<void()> func);
+	void SetFunction(float time, std::function<void()> func);
+	void SetTime(float time);
+	float GetTime() const;
 private:
-	float gonetime_;
-	float endtime_;
+	float gonetime_ = 0.f;
+	float endtime_ = 10e5;
 
 	std::function<void()> func_;
 };

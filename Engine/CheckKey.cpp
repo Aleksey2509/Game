@@ -1,6 +1,6 @@
 #include "CheckKey.hpp"
 
-CheckKey::CheckKey()
+void CheckKey::Init()
 {
 	for(char i = 'A'; i <= 'Z'; i++)
 	{
@@ -31,3 +31,6 @@ void CheckKey::Update()
 	buttons_['R'] = sf::Mouse::isButtonPressed(sf::Mouse::Right);
 	buttons_['M'] = sf::Mouse::isButtonPressed(sf::Mouse::Middle);
 }
+
+std::unordered_map<char, bool> CheckKey::keys_ = {};
+std::unordered_map<char, bool> CheckKey::buttons_ = {};

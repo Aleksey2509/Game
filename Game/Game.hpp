@@ -9,7 +9,7 @@
 class Game
 {
 public:
-	Game(float dt, float fixdt, unsigned int winWidth, unsigned int winHeight);
+	Game(const float& dt, const float& fixdt, unsigned int winWidth, unsigned int winHeight);
 	~Game();
 
 	void Update();
@@ -22,9 +22,8 @@ private:
 	sf::RenderWindow window_;
 	sf::Event event_;
 
-	float dt_;
-	float fixdt_;
-	CheckKey checkKey_;
+	const float& dt_;
+	const float& fixdt_;
 
 	void HandleEvents();
 };

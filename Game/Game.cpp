@@ -1,7 +1,8 @@
 #include "Game.hpp"
 
-Game::Game(float dt, float fixdt, unsigned int winWidth, unsigned int winHeight) : dt_(dt), fixdt_(fixdt), checkKey_()
+Game::Game(const float& dt, const float& fixdt, unsigned int winWidth, unsigned int winHeight) : dt_(dt), fixdt_(fixdt)
 {
+	CheckKey::Init();
 	sf::VideoMode win(winWidth, winHeight);
 	window_.create(win, "Bulletoid");
 	window_.setFramerateLimit(288);
@@ -18,7 +19,7 @@ void Game::Update()
 {
 	HandleEvents();
 	machine_->Update();
-	checkKey_.Update();
+	CheckKey::Update();
 }
 
 void Game::FixedUpdate()
