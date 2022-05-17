@@ -14,6 +14,7 @@ InGame::InGame(StateMachine& machine) : State(machine)
 InGame::~InGame()
 {
 	delete player_;
+	delete heart_;
 }
 
 void InGame::FixedUpdate()
@@ -36,12 +37,26 @@ void InGame::Render(sf::RenderTarget& target)
 {
 	target.draw(sprites_["background"]);
 	target.draw(*player_);
+	if(heart_)
+	{
+		target.draw(*heart_);
+	}
+}
+
+void InGame::SpawnHeart()
+{
+	if(heartSpawnClock_.getElapsedTime().asSeconds() > 10.f)
+	{
+		heart_ = new Heart(dt_, fixdt_, &textureManager_.Get("heart"));
+	}
 }
 
 void InGame::InitAssets()
 {
 	textureManager_.Load("player", "../Images/player.png");
 	textureManager_.Load("background", "../Images/map.png");
+	textureManager_.Load("heart", "../Images/heart.png");
+	textureManager_.Load("healthbar", "../Images/healthbar.png");
 }
 
 void InGame::InitPlatforms()
@@ -70,15 +85,39 @@ void InGame::InitSprites()
 void InGame::InitEntities()
 {
 	player_ = new Player(dt_, fixdt_, &textureManager_.Get("player"));
+	player_->healthbar_ = new HealthBar(&textureManager_.Get("healthbar"));
 }
 
 void InGame::FixedUpdateEntities()
 {
 	player_->FixedUpdate();
+	if(heart_)
+	{
+		heart_->FixedUpdate();
+	}
 }
 
 void InGame::UpdateEntities()
 {
 	player_->ResolveCollision(platforms_);
+	if(heart_)
+	{
+		player_->ResolveCollision(heart_);
+	}
 	player_->Update();
+	if(!heart_)
+	{
+		SpawnHeart();
+	}
+	if(heart_ && !heart_->IsExist())
+	{
+		delete heart_;
+		heart_ = nullptr;
+	}
+	else if(heart_)
+	{
+		heart_->Update();
+		heart_->ResolveCollision(platforms_);
+		heartSpawnClock_.restart();
+	}
 }
