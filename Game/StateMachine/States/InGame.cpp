@@ -19,25 +19,26 @@ InGame::InGame(StateMachine& machine) : State(machine)
 
 InGame::~InGame()
 {
-	delete player_;
+	// delete player_;
 }
 
 void InGame::FixedUpdate()
 {
-	if(player_->IsAlive())
-	{
-		FixedUpdateEntities();
-	}
+	// if(player_->IsAlive())
+	// {
+	// }
+    resolveBulletCollisions();
+    FixedUpdateEntities();
 }
 
 void InGame::Update()
 {
-    if(player_->IsAlive())
-	{
-		UpdateEntities();
-	}
+    // if(player_->IsAlive())
+	// {
+    //	}
+	UpdateEntities();
     static int ticks = 1;
-    if (bullets_.size() < maxBullets && ((ticks % 200) == 0))
+    if (bullets_.size() < maxBullets)
         InitBullet();
 
     ticks = (ticks + 1) % 200;
@@ -46,28 +47,34 @@ void InGame::Update()
 void InGame::Render(sf::RenderTarget& target)
 {
 	target.draw(sprites_["background"]);
-	target.draw(*player_);
+	// target.draw(*player_);
+    for (auto bulletIt = bullets_.begin(); bulletIt != bullets_.end(); ++bulletIt)
+    {
+        target.draw(bulletIt->GetSprite());
+    }
 }
 
 void InGame::InitAssets()
 {
-	textureManager_.Load("player", "../Images/player.png");
+	// textureManager_.Load("player", "../Images/player.png");
 	textureManager_.Load("background", "../Images/map.png");
+    textureManager_.Load("rightBullet", "../Images/rightBullet.png");
+    textureManager_.Load("leftBullet", "../Images/leftBullet.png");
 }
 
 void InGame::InitPlatforms()
 {
-	platforms_.push_back(Platform(sf::Vector2f(kWidth/2.f, 940.f), sf::Vector2f(1100.f, 100.f)));
-	platforms_.push_back(Platform(sf::Vector2f(140.f, 755.f), sf::Vector2f(220.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(500.f, 755.f), sf::Vector2f(260.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(810.f, 755.f), sf::Vector2f(200.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 595.f), sf::Vector2f(200.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(730.f, 565.f), sf::Vector2f(180.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(480.f, 445.f), sf::Vector2f(200.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(210.f, 305.f), sf::Vector2f(200.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(810.f, 335.f), sf::Vector2f(200.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(420.f, 175.f), sf::Vector2f(200.f, 50.f)));
-	platforms_.push_back(Platform(sf::Vector2f(730.f, 175.f), sf::Vector2f(200.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(1100.f, 100.f), sf::Vector2f(kWidth/2.f, 940.f)));
+	platforms_.push_back(Platform(sf::Vector2f(220.f, 50.f), sf::Vector2f(140.f, 755.f)));
+	platforms_.push_back(Platform(sf::Vector2f(260.f, 50.f), sf::Vector2f(500.f, 755.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(810.f, 755.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(200.f, 595.f)));
+	platforms_.push_back(Platform(sf::Vector2f(180.f, 50.f), sf::Vector2f(730.f, 565.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(480.f, 445.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(210.f, 305.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(810.f, 335.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(420.f, 175.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(730.f, 175.f)));
 }
 
 void InGame::InitSprites()
@@ -80,12 +87,12 @@ void InGame::InitSprites()
 
 void InGame::InitEntities()
 {
-	player_ = new Player(dt_, fixdt_, &textureManager_.Get("player"));
+	// player_ = new Player(dt_, fixdt_, &textureManager_.Get("player"));
 }
 
 void InGame::FixedUpdateEntities()
 {
-	player_->FixedUpdate();
+	// player_->FixedUpdate();
     for (auto bulletIt = bullets_.begin(); bulletIt != bullets_.end(); ++bulletIt)
     {
         bulletIt->FixedUpdate();
@@ -100,8 +107,8 @@ void InGame::FixedUpdateEntities()
 
 void InGame::UpdateEntities()
 {
-	player_->ResolveCollision(platforms_);
-	player_->Update();
+	// player_->ResolveCollision(platforms_);
+	// player_->Update();
 }
 
 void InGame::InitBullet()
@@ -110,10 +117,11 @@ void InGame::InitBullet()
     std::uniform_int_distribution<int> distributionY(0, window_.getSize().y - 100);
     std::uniform_int_distribution<int> distributionDir(0, 1);
 
+    int startY = distributionY(gen);
     if (distributionDir(gen) == 0)
-        bullets_.push_back(Bullet(dt_, fixdt_, &(textureManager_.Get("bullet")), distributionY(gen), Direction::LEFT));
+        bullets_.push_back(Bullet(dt_, fixdt_, &(textureManager_.Get("rightBullet")), startY, Direction::LEFT));
     else
-        bullets_.push_back(Bullet(dt_, fixdt_, &(textureManager_.Get("bullet")), distributionY(gen), Direction::RIGHT));
+        bullets_.push_back(Bullet(dt_, fixdt_, &(textureManager_.Get("leftBullet")), startY, Direction::RIGHT));
 }
 
 void InGame::resolveBulletCollisions()

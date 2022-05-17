@@ -47,13 +47,12 @@ void Bullet::InitSprite()
 
     sprite_.setTextureRect(toDraw_);
 	sprite_.setScale(sf::Vector2f(kBulletWidth / textureSize_.x, kBulletHeight / textureSize_.y));
-    std::cout << kBulletWidth / textureSize_.x << ", " << kBulletHeight / textureSize_.y << std::endl;
 }
 
 
 void Bullet::FixedUpdate()
 {
-    #if 1
+    #if 0
     std::ofstream log;
     log.open("log", std::ios_base::app);
     log << "\n\nUpdating bullet\n";
@@ -72,7 +71,6 @@ void Bullet::FixedUpdate()
             toDraw_.left  = textureSize_.x - toDraw_.width;
 
             sprite_.setTextureRect(toDraw_);
-            // goto debugPrint;
             return;
         }
 
@@ -85,7 +83,6 @@ void Bullet::FixedUpdate()
             toDraw_.width = textureSize_.x * box_.sz_.x / kBulletWidth;
 
             sprite_.setTextureRect(toDraw_);
-            // goto debugPrint;
             return;
         }
 
@@ -101,7 +98,6 @@ void Bullet::FixedUpdate()
             toDraw_.width = textureSize_.x * box_.sz_.x / kBulletWidth;
 
             sprite_.setTextureRect(toDraw_);
-            goto debugPrint;
             return;
         }
 
@@ -116,7 +112,6 @@ void Bullet::FixedUpdate()
             toDraw_.left = textureSize_.x - toDraw_.width;
 
             sprite_.setTextureRect(toDraw_);
-            goto debugPrint;
             return;
         }
 
@@ -126,7 +121,7 @@ void Bullet::FixedUpdate()
 
 
 
-    #if 1
+    #if 0
 debugPrint:
     log << "Now: \n";
     log << "box_sz_x - " << box_.sz_.x << " box_sz_y - " << box_.sz_.y << " box_pos_x - " << box_.pos_.x
