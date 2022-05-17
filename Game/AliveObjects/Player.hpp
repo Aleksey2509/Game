@@ -37,6 +37,9 @@ private:
 
 	bool moveable_ = true;
 
+	bool hit_ = false;
+	int currhit_ = 10;
+	sf::Clock hitTimer_;
 
 	const sf::Vector2i playerSize_ = sf::Vector2i(96, 84);
 	std::unordered_map<std::string, Animation> animations_;
@@ -44,6 +47,7 @@ private:
 	void Animate();
 	void KeepInBorders();
 	void Move();
+	void UpdateTimer();
 	void UpdateVelocity();
 	void InitAnimations();
 	void InitBody();

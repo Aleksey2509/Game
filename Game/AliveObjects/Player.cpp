@@ -29,6 +29,11 @@ void Player::Update()
 	Animate();
 	UpdateVelocity();
 	KeepInBorders();
+	UpdateTimer();
+	if(healthbar_->GetHealthState() <= 0)
+	{
+		alive_ = false;
+	}
 }
 
 void Player::ResolveCollision(std::vector<Platform>& platforms)
@@ -154,6 +159,24 @@ void Player::Move()
 	auto body = reinterpret_cast<sf::Sprite*>(drawable_);
 	body->setOrigin(sf::Vector2f(playerSize_.x/2.f, playerSize_.y/1.315f));
 	body->setPosition(box_.pos_);
+}
+
+void Player::UpdateTimer()
+{
+	if(hit_)
+	{
+		unsigned int blink[2] = {60, 255};
+
+		auto body = reinterpret_cast<sf::Sprite*>(drawable_);
+
+		sf::Color clr = body->getColor();
+		body->setColor(sf::Color(clr.r, clr.g, clr.b, blink[(!(currhit_%2) ? 0 : 1)]));
+		if(hitTimer_.getElapsedTime().asSeconds() > 0.175f)
+		{
+			currhit_++;
+			hitTimer_.restart();
+		}
+	}
 }
 
 void Player::UpdateVelocity()
