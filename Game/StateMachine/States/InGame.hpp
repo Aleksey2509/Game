@@ -10,7 +10,6 @@
 #include "AssetsManager.hpp"
 #include "Platform.hpp"
 #include "StateMachine/StateMachine.hpp"
-#include "AliveObjects/Player.hpp"
 
 class InGame : public State
 {

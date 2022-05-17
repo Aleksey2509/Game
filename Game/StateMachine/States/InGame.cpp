@@ -38,7 +38,7 @@ void InGame::Update()
 	{
         UpdateEntities();
         static int ticks = 1;
-        if (bullets_.size() < maxBullets)
+        if (bullets_.size() < maxBullets && (ticks % 200) == 0)
             InitBullet();
 
         ticks = (ticks + 1) % 200;
@@ -79,17 +79,17 @@ void InGame::InitAssets()
 
 void InGame::InitPlatforms()
 {
-	platforms_.push_back(Platform(sf::Vector2f(1100.f, 100.f), sf::Vector2f(kWidth/2.f, 940.f)));
-	platforms_.push_back(Platform(sf::Vector2f(220.f, 50.f), sf::Vector2f(140.f, 755.f)));
-	platforms_.push_back(Platform(sf::Vector2f(260.f, 50.f), sf::Vector2f(500.f, 755.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(810.f, 755.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(200.f, 595.f)));
-	platforms_.push_back(Platform(sf::Vector2f(180.f, 50.f), sf::Vector2f(730.f, 565.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(480.f, 445.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(210.f, 305.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(810.f, 335.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(420.f, 175.f)));
-	platforms_.push_back(Platform(sf::Vector2f(200.f, 50.f), sf::Vector2f(730.f, 175.f)));
+	platforms_.push_back(Platform(sf::Vector2f(kWidth/2.f, 940.f), sf::Vector2f(1100.f, 100.f)));
+	platforms_.push_back(Platform(sf::Vector2f(140.f, 755.f), sf::Vector2f(220.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(500.f, 755.f), sf::Vector2f(260.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(810.f, 755.f), sf::Vector2f(200.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(200.f, 595.f), sf::Vector2f(200.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(730.f, 565.f), sf::Vector2f(180.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(480.f, 445.f), sf::Vector2f(200.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(210.f, 305.f), sf::Vector2f(200.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(810.f, 335.f), sf::Vector2f(200.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(420.f, 175.f), sf::Vector2f(200.f, 50.f)));
+	platforms_.push_back(Platform(sf::Vector2f(730.f, 175.f), sf::Vector2f(200.f, 50.f)));
 }
 
 void InGame::InitSprites()
@@ -153,7 +153,6 @@ void InGame::UpdateEntities()
 
 void InGame::InitBullet()
 {
-    // Bullet bullet(dt_, fixdt_, &(textureManager_.Get("bullet")));
     std::uniform_int_distribution<int> distributionY(0, window_.getSize().y - 100);
     std::uniform_int_distribution<int> distributionDir(0, 1);
 
