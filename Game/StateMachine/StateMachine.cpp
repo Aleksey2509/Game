@@ -11,7 +11,7 @@ StateMachine::~StateMachine()
 {
 	while(!states_.empty())
 	{
-		delete states_.top();
+		delete states_.front();
 		states_.pop();
 	}
 }
@@ -25,7 +25,7 @@ void StateMachine::FixedUpdate()
 {
 	if(!states_.empty())
 	{
-		states_.top()->FixedUpdate();
+		states_.front()->FixedUpdate();
 	}
 }
 
@@ -33,10 +33,10 @@ void StateMachine::Update()
 {
 	if(!states_.empty())
 	{
-		states_.top()->Update();
-		if(!states_.top()->IsRunning())
+		states_.front()->Update();
+		if(!states_.front()->IsRunning())
 		{
-			delete states_.top();
+			delete states_.front();
 			states_.pop();
 		}
 	}
@@ -52,7 +52,7 @@ void StateMachine::Render()
 
 	if(!states_.empty())
 	{
-		states_.top()->Render(frame_);
+		states_.front()->Render(frame_);
 	}
 	frame_.display();
 	sprite_.setTexture(frame_.getTexture());

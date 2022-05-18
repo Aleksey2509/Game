@@ -1,8 +1,5 @@
 #include <iostream>
-#include "InGame.hpp"
-
-static std::random_device rd;
-static std::mt19937 gen(rd());
+#include "AllStates.hpp"
 
 static const int kWidth = 1000;
 static const int kHeight = 1000;
@@ -28,6 +25,12 @@ void InGame::FixedUpdate()
         FixedUpdateEntities();
         resolveBulletCollisions();
 	}
+    else
+    {
+        machine_.PushState(new EndScreen(machine_));
+        isRun = false;
+        return;
+    }
 }
 
 void InGame::Update()
@@ -40,6 +43,12 @@ void InGame::Update()
             InitBullet();
 
         ticks = (ticks + 1) % 200;
+    }
+    else
+    {
+        machine_.PushState(new EndScreen(machine_));
+        isRun = false;
+        return;
     }
 }
 
@@ -152,6 +161,9 @@ void InGame::UpdateEntities()
 
 void InGame::InitBullet()
 {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+
     std::uniform_int_distribution<int> distributionY(0, window_.getSize().y - 100);
     std::uniform_int_distribution<int> distributionDir(0, 1);
 

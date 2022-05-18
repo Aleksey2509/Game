@@ -2,8 +2,9 @@
 #define GAME_GAME_HPP
 
 #include "CheckKey.hpp"
-#include "StateMachine/StateMachine.hpp"
+#include "StateMachine/States/InMenu.hpp"
 #include "StateMachine/States/InGame.hpp"
+#include "StateMachine/StateMachine.hpp"
 #include <SFML/Graphics.hpp>
 
 class Game
