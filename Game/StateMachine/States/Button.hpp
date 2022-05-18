@@ -52,10 +52,6 @@ public:
 
     void Render(sf::RenderTarget& target)
     {
-        sf::RectangleShape shapeToDraw = shape_;
-        if (pressed_)
-            shapeToDraw.setFillColor(sf::Color::Red);
-
         target.draw(shape_);
         target.draw(text_);
     }

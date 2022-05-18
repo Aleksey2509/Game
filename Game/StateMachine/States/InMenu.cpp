@@ -1,4 +1,4 @@
-#include "InMenu.hpp"
+#include "AllStates.hpp"
 
 InMenu::InMenu(StateMachine& machine) : State(machine),
     playButton_({275, 200}, {450, 100}, sf::Color::Transparent, "Start Game"),
@@ -44,43 +44,3 @@ void InMenu::Render(sf::RenderTarget& target)
     playButton_.Render(target);
     exitButton_.Render(target);
 }
-
-
-// void InMenu::FixedUpdate()
-// {
-//     playButton_.setColor(Color::White);
-//     aboutButton_.setColor(Color::White);
-//     exitButton_.setColor(Color::White);
-//     hoveringOverButton = 0;
-//     window.clear(Color(129, 181, 221));
-
-//     if (IntRect(100, 30, 300, 50).contains(Mouse::getPosition(window)))
-//     {
-//         menu1.setColor(Color::Blue);
-//         hoveringOverButton = 1;
-//     }
-//     if (IntRect(100, 90, 300, 50).contains(Mouse::getPosition(window)))
-//     {
-//         menu2.setColor(Color::Blue);
-//         hoveringOverButton = 2;
-//     }
-//     if (IntRect(100, 150, 300, 50).contains(Mouse::getPosition(window)))
-//     {
-//         menu3.setColor(Color::Blue);
-//         hoveringOverButton = 3;
-//     }
-
-//     if (Mouse::isButtonPressed(Mouse::Left))
-//     {
-//         if (hoveringOverButton == 1) isMenu = false;//если нажали первую кнопку, то выходим из меню 
-//         if (hoveringOverButton == 2) { window.draw(about); window.display(); while (!Keyboard::isKeyPressed(Keyboard::Escape)); }
-//         if (hoveringOverButton == 3)  { window.close(); isMenu = false; }
-
-//     }
-
-//     window.draw(playButton_);
-//     window.draw(aboutButton_);
-//     window.draw(exitButton_);
-    
-//     window.display();
-// }
