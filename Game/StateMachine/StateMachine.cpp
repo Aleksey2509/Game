@@ -12,13 +12,24 @@ StateMachine::~StateMachine()
 	while(!states_.empty())
 	{
 		delete states_.front();
-		states_.pop();
+		states_.pop_front();
 	}
 }
 
-void StateMachine::PushState(State* state)
+void StateMachine::PushBackState(State* state)
 {
-	states_.push(state);
+    states_.push_back(state);
+}
+
+void StateMachine::PushFrontState(State* state)
+{
+    states_.push_front(state);
+}
+
+void StateMachine::PopBackState()
+{
+    delete states_.back();
+    states_.pop_back();
 }
 
 void StateMachine::FixedUpdate()
@@ -37,7 +48,7 @@ void StateMachine::Update()
 		if(!states_.front()->IsRunning())
 		{
 			delete states_.front();
-			states_.pop();
+			states_.pop_front();
 		}
 	}
 	else

@@ -27,7 +27,7 @@ void EndScreen::Update()
     replayButton_.Update(window_);
     if (replayButton_.ifPressed())
     {
-        machine_.PushState(new InGame(machine_));
+        machine_.PushBackState(new InGame(machine_));
         isRun = false;
         return;
     }
@@ -35,7 +35,7 @@ void EndScreen::Update()
     menuButton_.Update(window_);
     if (menuButton_.ifPressed())
     {
-        machine_.PushState(new InMenu(machine_));
+        machine_.PushBackState(new InMenu(machine_));
         isRun = false;
         return;
     }

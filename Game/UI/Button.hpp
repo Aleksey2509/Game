@@ -36,16 +36,16 @@ public:
         if (CheckKey::CheckMouseButton('L'))
         {
             int stillPressed = true;
-            while (ifContainsPoint(sf::Mouse::getPosition(window)) && stillPressed)
+            if (ifContainsPoint(sf::Mouse::getPosition(window)) && stillPressed)
             {
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                    while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                     {
-                        stillPressed = false;
-                        if (ifContainsPoint(sf::Mouse::getPosition(window)))
-                        {
-                            pressed_ = true;
-                        }
                     }
+                    if (ifContainsPoint(sf::Mouse::getPosition(window)))
+                    {
+                        pressed_ = true;
+                    }
+
             }
         }
     }

@@ -10,7 +10,7 @@
 #include "AssetsManager.hpp"
 #include "CheckKey.hpp"
 #include "Platform.hpp"
-#include "Button.hpp"
+#include "UI/Button.hpp"
 #include <utility>
 #include <string>
 
@@ -99,8 +99,8 @@ private:
     AssetsManager<sf::Texture> textureManager_;
     std::unordered_map<std::string, sf::Sprite> sprites_;
 
-    Button menuButton_;
     Button continueButton_;
+    Button menuButton_;
 
     sf::Font font_;
     sf::Text paused_;

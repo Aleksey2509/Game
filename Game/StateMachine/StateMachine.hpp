@@ -1,7 +1,7 @@
 #ifndef GAME_STATEMACHINE_STATEMACHINE_HPP
 #define GAME_STATEMACHINE_STATEMACHINE_HPP
 
-#include <queue>
+#include <list>
 #include <SFML/Graphics.hpp>
 
 class State;
@@ -12,7 +12,9 @@ public:
 	StateMachine(sf::RenderWindow& window, const float& dt, const float& fixdt);
 	~StateMachine();
 
-	void PushState(State* state);
+	void PushBackState(State* state);
+    void PushFrontState(State* state);
+    void PopBackState();
 
 	void FixedUpdate();
 	void Update();
@@ -25,7 +27,7 @@ private:
 
 	sf::Sprite sprite_;
 	sf::RenderTexture frame_;
-	std::queue<State*> states_;
+	std::list<State*> states_;
 };
 
 class State

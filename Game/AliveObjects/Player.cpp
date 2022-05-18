@@ -226,7 +226,7 @@ void Player::InitAnimations()
 	auto sprite = reinterpret_cast<sf::Sprite*>(drawable_);
 
 	animations_["move"].Create(8, 0, 0.08f, playerSize_, *sprite, 3);
-	animations_["idle"].Create(7, 0, 0.08f, playerSize_, *sprite, 1);
+	animations_["idle"].Create(7, 0, 0.16f, playerSize_, *sprite, 1);
 	animations_["jump"].Create(2, 0, 0.125f, playerSize_, *sprite, 4);
 	animations_["fall"].Create(1, 0, 0.1f, playerSize_, *sprite, 6);
 	animations_["takedamage"].Create(7, 0, 0.08f, playerSize_, *sprite, 17);
