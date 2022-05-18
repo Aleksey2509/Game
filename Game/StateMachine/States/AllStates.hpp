@@ -99,8 +99,8 @@ private:
     AssetsManager<sf::Texture> textureManager_;
     std::unordered_map<std::string, sf::Sprite> sprites_;
 
-    Button menuButton_;
     Button continueButton_;
+    Button menuButton_;
 
     sf::Font font_;
     sf::Text paused_;

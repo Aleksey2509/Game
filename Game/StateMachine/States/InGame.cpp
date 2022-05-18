@@ -27,7 +27,7 @@ void InGame::FixedUpdate()
 	}
     else
     {
-        machine_.PushState(new EndScreen(machine_));
+        machine_.PushBackState(new EndScreen(machine_));
         isRun = false;
         return;
     }
@@ -35,6 +35,11 @@ void InGame::FixedUpdate()
 
 void InGame::Update()
 {
+    if (CheckKey::CheckKeyboardKey('P') || !window_.hasFocus())
+    {
+        machine_.PushFrontState(new InPause(machine_));
+        return;
+    }
     if(player_->IsAlive())
 	{
         UpdateEntities();
@@ -46,7 +51,7 @@ void InGame::Update()
     }
     else
     {
-        machine_.PushState(new EndScreen(machine_));
+        machine_.PushBackState(new EndScreen(machine_));
         isRun = false;
         return;
     }

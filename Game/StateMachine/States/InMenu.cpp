@@ -19,7 +19,7 @@ void InMenu::Update()
 
     if (playButton_.ifPressed())
     {
-        machine_.PushState(new InGame(machine_));
+        machine_.PushBackState(new InGame(machine_));
         isRun = false;
         return;
     }

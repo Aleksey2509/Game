@@ -7,7 +7,7 @@ Game::Game(const float& dt, const float& fixdt, unsigned int winWidth, unsigned 
 	window_.create(win, "Bulletoid");
 	window_.setFramerateLimit(288);
 	machine_ = new StateMachine(window_, dt, fixdt);
-	machine_->PushState(new InMenu(*machine_));
+	machine_->PushBackState(new InMenu(*machine_));
 }
 
 Game::~Game()
