@@ -17,7 +17,7 @@ private:
 	sf::Sprite sprite_;
 	sf::Texture* texture_;
 
-	size_t curpos_ = 1;
+	size_t curpos_ = 0;
 	size_t coords_[3] = {0, 32, 64};
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
