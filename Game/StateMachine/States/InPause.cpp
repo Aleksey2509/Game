@@ -34,9 +34,9 @@ void InPause::Update()
     menuButton_.Update(window_);
     if (menuButton_.ifPressed())
     {
+        isRun = false;
         machine_.PopBackState();
         machine_.PushBackState(new InMenu(machine_));
-        isRun = false;
         return;
     }
 }
